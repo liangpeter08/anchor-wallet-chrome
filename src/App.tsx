@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import { AnchorLogoWithWordmark } from "./logo/Logo";
+import Wallet from "./wallet/Wallets";
 
 function App() {
-  const [cookiesInfo, setCookiesInfo] = useState("");
+  const [cookieInfo, setCookieInfo] = useState("");
   useEffect(() => {
-    chrome.storage.local.get("cookies", function (result) {
-      console.log("cookie", result);
-      return setCookiesInfo(result.cookies);
-    });
+    fetchCookie();
   }, []);
+
+  const fetchCookie = () => {
+    chrome.storage.sync.get(["cookies"], function ({ cookies }) {
+      const [{ name, value }] = cookies;
+      setCookieInfo(name + "=" + value);
+    });
+  };
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{cookiesInfo}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <AnchorLogoWithWordmark includeSpotify />
+        <Wallet cookieInfo={cookieInfo}></Wallet>
       </header>
     </div>
   );

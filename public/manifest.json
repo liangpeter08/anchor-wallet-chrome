@@ -16,5 +16,6 @@
     "48": "app-icon-logo.png",
     "128": "app-icon-logo.png"
   },
-  "permissions": ["cookies", "storage", "https://development.anchor.fm/"]
+  "permissions": ["cookies", "storage", "https://development.anchor.fm/"],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

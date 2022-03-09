@@ -1,3 +1,3 @@
-chrome.cookies.getAll({}, function (cookies) {
-  chrome.storage.local.set({ cookies: cookies });
+chrome.cookies.getAll({ domain: "development.anchor.fm", name: "anchorpw_s" }, function (cookies) {
+  chrome.storage.sync.set({ cookies });
 });
